@@ -1,0 +1,31 @@
+System Requirements
+Docker
+
+
+Kubernetes
+
+
+kubectl
+
+
+Python 3.11+
+
+
+Ollama (optional)
+
+
+Git
+
+
+Python Dependencies
+Gateway
+fastapi
+uvicorn
+requests
+pydantic
+Agent
+langchain
+langchain-ollama
+requests
+fastapi
+uvicorn
