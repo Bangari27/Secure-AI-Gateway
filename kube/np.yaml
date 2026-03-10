@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: agent-only-gateway
+  namespace: ai-agents
+spec:
+  podSelector:
+    matchLabels:
+      app: security-agent
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              name: ai-control

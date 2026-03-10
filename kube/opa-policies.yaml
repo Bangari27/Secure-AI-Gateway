@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: opa-policies
+  namespace: policy
+data:
+  authz.rego: |
+    package mcp.authz
+
+    default allow = true
+
+

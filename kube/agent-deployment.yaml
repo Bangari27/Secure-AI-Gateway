@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: security-agent
+  namespace: ai-agents
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: security-agent
+  template:
+    metadata:
+      labels:
+        app: security-agent
+    spec:
+      containers:
+        - name: agent
+          image: project-security-agent:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: OLLAMA_BASE_URL
+              value: http://host.docker.internal:11434
+          ports:
+            - containerPort: 8000
