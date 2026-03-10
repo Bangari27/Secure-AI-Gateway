@@ -63,14 +63,12 @@ All tools must go through the gateway.
             (FastAPI Control Plane)
                      │
      ┌───────────────┼───────────────┐
-     ▼                               ▼
+                           
    OPA Policy Engine           Security Agent
   (Authorization)                (LLM)
-                                     │
-                                     ▼
+                                    |
                               Tool Execution
-                                     │
-                                     ▼
+                                    |     
                               Vulnerability DB
                                    (NVD)
 
