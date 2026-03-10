@@ -1,0 +1,80 @@
+🖥 Installation
+1️⃣ Clone Repository
+git clone https://github.com/YOURNAME/secure-ai-gateway.git
+
+cd secure-ai-gateway
+
+🐍 Python Environment (local dev)
+python -m venv venv
+
+source venv/bin/activate
+Windows
+venv\Scripts\activate
+
+🧠 Install Ollama (optional local LLM)
+https://ollama.com
+Pull model
+ollama pull llama3
+Run
+ollama run llama3
+
+🐳 Build Docker Images
+docker build -t gateway:latest ./gateway
+
+docker build -t security-agent:latest ./agents
+
+☸️ Deploy to Kubernetes
+Create namespaces
+kubectl create namespace ai-control
+
+kubectl create namespace ai-agents
+
+kubectl create namespace policy
+Deploy OPA
+kubectl apply -f kube/opa-policies.yaml
+
+kubectl apply -f kube/opa-deployment.yaml
+Deploy agent
+kubectl apply -f kube/agent-deployment.yaml
+Deploy gateway
+kubectl apply -f kube/gateway-deployment.yaml
+
+🧪 Test the System
+Port forward gateway
+kubectl port-forward svc/gateway 8080:8080 -n ai-control
+Query gateway
+curl -X POST http://localhost:8080/invoke \
+-H "Content-Type: application/json" \
+-d '{
+"user": "security_engineer",
+"agent": "security-agent",
+"prompt": "Is CVE-2024-1234 affecting our system?"
+}'
+
+🔍 Example Response
+{
+"user": "security_engineer",
+"agent": "security-agent",
+"cve": "CVE-2024-1234",
+"vulnerability": {
+ "severity": "High",
+ "cvss": 8.8,
+ "description": "...",
+ "mitigation": "Update dependency"
+}
+}
+
+🛡 OPA Policy Example
+package mcp.authz
+
+default allow = false
+
+allow if {
+input.user == "security_engineer"
+input.agent == "security-agent"
+}
+
+allow if {
+input.user == "security_engineer"
+input.tool == "vuln_lookup"
+}
