@@ -54,6 +54,8 @@ Service discovery
 🔄 Tool Brokering
 Agents cannot execute tools directly.
 All tools must go through the gateway.
+
+
                 User / CLI
                      │
                      ▼
@@ -71,6 +73,9 @@ All tools must go through the gateway.
                                      ▼
                               Vulnerability DB
                                    (NVD)
+
+
+                                   
 🔐 Security Model
 Zero-Trust AI design:
 Layer
