@@ -47,7 +47,7 @@ def invoke(req: InvokeRequest):
     resp = requests.post(
         AGENT_MAP[req.agent],
         json={"prompt": req.prompt},
-        timeout=60
+        timeout=90
     )
 
     agent_raw = resp.json().get("raw", "")
